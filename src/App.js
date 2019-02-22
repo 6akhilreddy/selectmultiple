@@ -1,26 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { Switch, Route } from "react-router-dom";
+import CreateAd from "./components/CreateAd";
+import StartStepper from "./components/StartStepper";
+import FullScreenStepper from "./components/FullScreenStepper";
+
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true
+  },
+  palette: {
+    type: "dark"
+  }
+});
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Switch>
+          <Route exact path="/" component={CreateAd} />
+          <Route exact path="/startstepper" component={StartStepper} />
+          <Route exact path="/fullscreenstepper" component={FullScreenStepper} />
+        </Switch>
+      </MuiThemeProvider>
     );
   }
 }
